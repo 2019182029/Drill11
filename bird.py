@@ -21,8 +21,6 @@ class Bird:
             self.action -= 1
             self.frame = 0
 
-        print(self.frame, self.action)
-
     def handle_event(self, event):
         pass
 
