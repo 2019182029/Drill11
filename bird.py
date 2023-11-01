@@ -24,6 +24,14 @@ class Bird:
         self.image = load_image('bird_animation.png')
 
     def update(self):
+        if self.frame + FRAMES_PER_TIME * game_framework.frame_time >= 5:
+            self.action -= 1
+        elif self.frame + FRAMES_PER_TIME * game_framework.frame_time >= 4 and self.action == 0:
+            self.action = 2
+
+        if self.action < 0:
+            self.action = 2
+
         self.x += self.dir * RUN_SPEED_PPS * game_framework.frame_time
         self.frame = (self.frame + FRAMES_PER_TIME * game_framework.frame_time) % 5
 
@@ -33,11 +41,6 @@ class Bird:
         elif self.x < 100:
             self.dir = 5
             self.face_dir = 1
-
-        if self.action == 0 and self.frame == 3:
-            self.action, self.frame = 2, 0
-        elif self.frame == 4:
-            self.action, self.frame = self.action - 1, 0
 
     def handle_event(self, event):
         pass
